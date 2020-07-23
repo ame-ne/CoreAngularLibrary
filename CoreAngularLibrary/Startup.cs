@@ -35,7 +35,7 @@ namespace CoreAngularLibrary
             services.Configure<AppSettings>(appSettingsSection);
 
             var appSettings = appSettingsSection.Get<AppSettings>();
-            var key = appSettings.Secret; //или просто _configuration["AppSettings:Secret"]
+            var key = appSettings.Secret; //РёР»Рё РїСЂРѕСЃС‚Рѕ _configuration["AppSettings:Secret"]
 
             services
                 .AddAuthentication(options =>
@@ -48,21 +48,21 @@ namespace CoreAngularLibrary
                     options.RequireHttpsMetadata = false;
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        // укзывает, будет ли валидироваться издатель при валидации токена
+                        // СѓРєР·С‹РІР°РµС‚, Р±СѓРґРµС‚ Р»Рё РІР°Р»РёРґРёСЂРѕРІР°С‚СЊСЃСЏ РёР·РґР°С‚РµР»СЊ РїСЂРё РІР°Р»РёРґР°С†РёРё С‚РѕРєРµРЅР°
                         ValidateIssuer = true,
-                        // строка, представляющая издателя
+                        // СЃС‚СЂРѕРєР°, РїСЂРµРґСЃС‚Р°РІР»СЏСЋС‰Р°СЏ РёР·РґР°С‚РµР»СЏ
                         ValidIssuer = AuthOptions.ISSUER,
-                        // будет ли валидироваться потребитель токена
+                        // Р±СѓРґРµС‚ Р»Рё РІР°Р»РёРґРёСЂРѕРІР°С‚СЊСЃСЏ РїРѕС‚СЂРµР±РёС‚РµР»СЊ С‚РѕРєРµРЅР°
                         ValidateAudience = true,
-                        // установка потребителя токена
+                        // СѓСЃС‚Р°РЅРѕРІРєР° РїРѕС‚СЂРµР±РёС‚РµР»СЏ С‚РѕРєРµРЅР°
                         ValidAudience = AuthOptions.AUDIENCE,
-                        // будет ли валидироваться время существования
+                        // Р±СѓРґРµС‚ Р»Рё РІР°Р»РёРґРёСЂРѕРІР°С‚СЊСЃСЏ РІСЂРµРјСЏ СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёСЏ
                         ValidateLifetime = true,
-                        // установка ключа безопасности
+                        // СѓСЃС‚Р°РЅРѕРІРєР° РєР»СЋС‡Р° Р±РµР·РѕРїР°СЃРЅРѕСЃС‚Рё
                         IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(key),
-                        // валидация ключа безопасности
+                        // РІР°Р»РёРґР°С†РёСЏ РєР»СЋС‡Р° Р±РµР·РѕРїР°СЃРЅРѕСЃС‚Рё
                         ValidateIssuerSigningKey = true,
-                        // истекает сразу
+                        // РёСЃС‚РµРєР°РµС‚ СЃСЂР°Р·Сѓ
                         ClockSkew = TimeSpan.Zero
                     };
                 });
@@ -115,7 +115,7 @@ namespace CoreAngularLibrary
             app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "ClientApp";
-                //костыль для angular cli timeoutexception (который, кажется, не помог)
+                //РєРѕСЃС‚С‹Р»СЊ РґР»СЏ angular cli timeoutexception (РєРѕС‚РѕСЂС‹Р№, РєР°Р¶РµС‚СЃСЏ, РЅРµ РїРѕРјРѕРі)
                 spa.Options.StartupTimeout = new TimeSpan(0, 5, 0);
                 if (env.IsDevelopment())
                 {
