@@ -1,0 +1,19 @@
+<div>
+    <h1>Список авторов</h1>
+    <a class="btn btn-success" [routerLink]="'/author/create'">Добавить</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td>ФИО</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let a of authors">
+                <td>{{a?.fio}}</td>
+                <td><a class="btn btn-info mr-1 ml-1" [routerLink]="'/author/'+a?.id+'/edit'">Редактировать</a>
+                    <button class="btn btn-danger mr-1 ml-1" (click)="delete(a)">Удалить</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

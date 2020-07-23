@@ -1,0 +1,21 @@
+<div>
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {{ (!currentUser ? 'Вход/Регистрация' : currentUser.login+' ('+(currentUser.role | roleTitle)+')') }}
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" routerLink="/auth/login" *ngIf="!currentUser">Вход</a>
+            <a class="dropdown-item" routerLink="/auth/registration" *ngIf="!currentUser">Регистрация</a>
+            <a class="dropdown-item" routerLink="/my/cart" *ngIf="currentUser">Мои книги на оформление</a>
+            <a class="dropdown-item" routerLink="/my/orders" *ngIf="currentUser">Мои книги</a>
+            <span class="dropdown-item" *ngIf="currentUser" (click)="logout()" style="cursor: pointer;">Выход</span>
+            <div *ngIf="(currentUser | isAdmin) || (currentUser | isLibrarian)">
+                <span class="dropdown-item">---Задачи библиотекаря---</span>
+                <a class="dropdown-item" routerLink="/orders/active">Выданные книги</a>
+                <a class="dropdown-item" routerLink="/orders/give">Заказы на выдачу</a>
+                <a class="dropdown-item" routerLink="/orders/take">Заказы на возврат</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="w-25 m-auto">
+    <div>
+        <form novalidate #form="ngForm" (ngSubmit)="authenticate(form)">
+            <div class="form-group">
+                <label>Логин</label>
+                <input class="form-control" name="login" [(ngModel)]="login" #loginInput="ngModel" required />
+                <div class="text-danger" *ngIf="loginInput.touched && loginInput.errors?.required">
+                    Необходимо ввести логин
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Пароль</label>
+                <input class="form-control" name="password" type="password" [(ngModel)]="password"
+                    #passwordInput="ngModel" required />
+                <div class="text-danger" *ngIf="passwordInput.touched && passwordInput.errors?.required">
+                    Необходимо ввести пароль
+                </div>
+            </div>
+            <div class="text-xs-center">
+                <button class="btn btn-primary" [disabled]="form.invalid || form.pending" type="submit">Вход</button>
+            </div>
+        </form>
+    </div>
+</div>

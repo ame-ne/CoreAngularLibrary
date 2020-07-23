@@ -1,0 +1,49 @@
+<div class="w-25 m-auto">
+    <div>
+        <form novalidate #form="ngForm" (ngSubmit)="registration(request)">
+            <div class="form-group">
+                <label>Фамилия</label>
+                <input class="form-control" name="lastName" [(ngModel)]="request.lastName" #lastName="ngModel"
+                    required />
+                <div class="text-danger" *ngIf="lastName.touched && lastName.errors?.required">
+                    Необходимо ввести фамилию
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Имя</label>
+                <input class="form-control" name="firstName" [(ngModel)]="request.firstName" #firstName="ngModel"
+                    required />
+                <div class="text-danger" *ngIf="firstName.touched && firstName.errors?.required">
+                    Необходимо ввести имя
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input class="form-control" name="email" type="email" [(ngModel)]="request.email" #email="ngModel"
+                    required email />
+                <div class="text-danger" *ngIf="email.touched && email.errors?.required">
+                    Необходимо ввести почту
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Логин</label>
+                <input class="form-control" name="login" [(ngModel)]="request.login" #login="ngModel" required />
+                <div class="text-danger" *ngIf="login.touched && login.errors?.required">
+                    Необходимо ввести логин
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Пароль</label>
+                <input class="form-control" name="password" type="password" [(ngModel)]="request.password"
+                    #password="ngModel" required />
+                <div class="text-danger" *ngIf="password.touched && password.errors?.required">
+                    Необходимо ввести пароль
+                </div>
+            </div>
+            <div class="text-xs-center">
+                <button class="btn btn-primary" [disabled]="form.invalid || form.pending"
+                    type="submit">Зарегистрироваться</button>
+            </div>
+        </form>
+    </div>
+</div>

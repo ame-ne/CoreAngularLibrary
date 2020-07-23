@@ -1,0 +1,57 @@
+<div>
+    <h1>Список книг</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <input [(ngModel)]="searchText" placeholder="Поиск..." class="form-control" (keyup)="goToPage(1)" />
+            </div>
+            <div class="col-4">
+                <pagination [pageSize]="pageSize" [itemsCount]="booksCount" (goToPage)="goToPage($event)"></pagination>
+            </div>
+            <div class="col-4">
+                <a *ngIf="(currentUser | isAdmin) || (currentUser | isStorekeeper)" class="btn btn-success float-right"
+                    [routerLink]="'/book/create'">Добавить</a>
+            </div>
+        </div>
+    </div>
+    <table class="table table-striped mt-2">
+        <thead>
+            <tr>
+                <td></td>
+                <td>Название</td>
+                <td>Авторы</td>
+                <td>Жанры</td>
+                <td>Количество</td>
+                <td *ngIf="currentUser"></td>
+                <td *ngIf="(currentUser | isAdmin) || (currentUser | isStorekeeper)"></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let b of displayBooks">
+                <td>
+                    <a [routerLink]="'/book/'+b?.id">
+                        <img class="pic-preview" [src]="b?.coverUrl | safeImage"
+                            *ngIf="b?.coverUrl; else noImageFound" />
+                        <ng-template #noImageFound>
+                            <img class="pic-preview" src="assets/doge.jpg">
+                        </ng-template>
+                    </a>
+                </td>
+                <td><a [routerLink]="'/book/'+b?.id">{{b?.title}}</a></td>
+                <td>{{b?.authors}}</td>
+                <td>{{b?.genres}}</td>
+                <td>{{b?.count}}</td>
+                <td *ngIf="currentUser">
+                    <button *ngIf="b?.count > 0 && !cartService.alreadyInCart(b)" class="btn btn-primary"
+                        (click)="addToCart(b)">Взять</button>
+                    <span *ngIf="cartService.alreadyInCart(b)">В корзине</span>
+                </td>
+                <td *ngIf="(currentUser | isAdmin) || (currentUser | isStorekeeper)">
+                    <button class="btn btn-danger mr-1 ml-1 float-right" (click)="delete(b)">Удалить</button>
+                    <a class="btn btn-info mr-1 ml-1 float-right"
+                        [routerLink]="'/book/'+b?.id+'/edit'">Редактировать</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

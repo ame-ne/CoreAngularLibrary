@@ -1,0 +1,26 @@
+<div class="container body-content">
+    <h1>Заказы</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td>Пользователь</td>
+                <td>Название</td>
+                <td>Дата получения</td>
+                <td>Дата возврата</td>
+                <td>Статус</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let order of orders">
+                <td>{{order?.user?.lastName}} {{order?.user?.firstName}}</td>
+                <td>{{order?.book?.title}}</td>
+                <td>{{order?.dateFrom | formatDate}}</td>
+                <td>{{order?.dateTo | formatDate}}</td>
+                <td>{{order?.status | orderStatusTitle}}</td>
+                <td><button *ngIf="order && actionName" class="btn btn-primary"
+                        (click)="doAction(order)">{{actionName}}</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

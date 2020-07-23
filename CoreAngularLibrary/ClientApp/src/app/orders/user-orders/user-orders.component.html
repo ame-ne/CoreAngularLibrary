@@ -1,0 +1,24 @@
+<div class="container body-content">
+    <h1>Мои заказы</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td>Название</td>
+                <td>Дата получения</td>
+                <td>Дата возврата</td>
+                <td>Статус</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let order of orders">
+                <td>{{order?.book?.title}}</td>
+                <td>{{order?.dateFrom | formatDate}}</td>
+                <td>{{order?.dateTo | formatDate}}</td>
+                <td>{{order?.status | orderStatusTitle}}</td>
+                <td><button *ngIf="order?.status === 2" class="btn btn-primary"
+                        (click)="returnOrder(order)">Вернуть</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

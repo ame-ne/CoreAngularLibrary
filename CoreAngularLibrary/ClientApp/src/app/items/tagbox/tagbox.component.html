@@ -1,0 +1,14 @@
+<div id="selectedItems" class="mb-2" style="display: flex;">
+    <div *ngFor="let i of selectedItems">
+        <div class="mr-2">
+            <span>{{i[displayField]}}</span>
+            <span (click)="removeItem(i[keyField])" class="badge badge-secondary"> X </span>
+        </div>
+    </div>
+</div>
+<select class="form-control" id="itemsToSelect" #mySelect (change)="onSelectItem($event, mySelect.value)">
+    <option [value]="-1">---</option>
+    <option *ngFor="let i of items" [value]="i[keyField]">
+        {{i[displayField]}}
+    </option>
+</select>

@@ -1,0 +1,9 @@
+<h4>{{isNew ? 'Добавление' : 'Редактирование'}}</h4>
+<form #form="ngForm" novalidate (ngSubmit)="save()">
+    <div class="form-group">
+        <label>Название</label>
+        <input class="form-control" name="title" [(ngModel)]="genre.title" />
+    </div>
+    <button type="submit" class="btn btn-primary mr-1 ml-1">Сохранить</button>
+    <button type="submit" class="btn btn-secondary mr-1 ml-1" routerLink="/genres">Отмена</button>
+</form>

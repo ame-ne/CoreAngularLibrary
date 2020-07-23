@@ -1,0 +1,19 @@
+<label class="btn btn-default">
+    <input #fileUploader *ngIf="mode == 'multiple'" type="file" multiple (change)="selectFiles($event)"
+        accept=".png, .jpg, .jpeg" />
+    <input #fileUploader *ngIf="mode == 'single'" type="file" (change)="selectFiles($event)"
+        accept=".png, .jpg, .jpeg" />
+</label>
+
+<div class="btn btn-success"
+    *ngIf="!(!selectedFiles || selectedFiles.length == 0 || (mode == 'single' && uploadedBlobs.length >= 1))"
+    (click)="uploadFiles()">
+    Загрузить
+</div>
+
+<div class="card" *ngIf="uploadedBlobs && uploadedBlobs.length > 0">
+    <div class="card-header">Загруженные файлы:</div>
+    <ul class="list-group list-group-flush" *ngFor="let file of uploadedBlobs">
+        <li class="list-group-item">{{ file.fileName }}</li>
+    </ul>
+</div>

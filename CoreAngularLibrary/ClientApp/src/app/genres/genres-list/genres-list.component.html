@@ -1,0 +1,19 @@
+<div>
+    <h1>Список жанров</h1>
+    <a class="btn btn-success" [routerLink]="'/genre/create'">Добавить</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td>Название</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let g of genres">
+                <td>{{g?.title}}</td>
+                <td><a class="btn btn-info mr-1 ml-1" [routerLink]="'/genre/'+g?.id+'/edit'">Редактировать</a>
+                    <button class="btn btn-danger mr-1 ml-1" (click)="delete(g)">Удалить</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

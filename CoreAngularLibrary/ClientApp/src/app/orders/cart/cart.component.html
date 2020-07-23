@@ -1,0 +1,21 @@
+<div class="container body-content">
+    <h1>Книги на оформление</h1>
+    <div *ngIf="books && books.length > 0">
+        <table class=" table table-striped">
+            <thead>
+                <tr>
+                    <td>Название</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let b of books">
+                    <td>{{b?.title}}</td>
+                    <td><button class="btn btn-primary" (click)="removeFromCart(b)">Убрать</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="btn btn-primary" (click)="placeOrder()">Оформить</button>
+    </div>
+    <div *ngIf="!books || books.length === 0">Пусто!</div>
+</div>

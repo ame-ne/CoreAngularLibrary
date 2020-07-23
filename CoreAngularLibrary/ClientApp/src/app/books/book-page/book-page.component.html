@@ -1,0 +1,35 @@
+<div class="container">
+        <div class="row">
+                <div class="col-6 pic-preview mr-5 mb-2">
+                        <div class="row">
+                                <img class="pic-preview" [src]="book.coverUrl | safeImage"
+                                        *ngIf="book.coverUrl; else noImageFound" (click)="openModal('pages-modal')"
+                                        style="cursor: pointer;" />
+                                <ng-template #noImageFound>
+                                        <img class="pic-preview" src="assets/doge.jpg">
+                                </ng-template>
+                        </div>
+                        <div *ngIf="book.pageExampleBlobIds && book.pageExampleBlobIds.length > 0" class="row">
+                                <a class="mx-auto btn"
+                                        (click)="openModal('pages-modal')">({{book.pageExampleBlobIds.length}})</a>
+                        </div>
+                </div>
+                <div class="col-6">
+                        <h3>Название</h3>
+                        <p>{{book.title}}</p>
+                        <h3>Автор(-ы)</h3>
+                        <p>{{book.authors}}</p>
+                        <h3>Жанр(-ы)</h3>
+                        <p>{{book.genres}}</p>
+                        <div *ngIf="currentUser">
+                                <button *ngIf="book.count > 0 && !cartService.alreadyInCart(book)"
+                                        class="btn btn-primary" (click)="addToCart(book)">Взять</button>
+                                <span *ngIf="cartService.alreadyInCart(book)">В корзине</span>
+                        </div>
+                </div>
+        </div>
+</div>
+
+<modal id="pages-modal">
+        <carousel [dataSource]="book.pageExampleBlobIds"></carousel>
+</modal>
