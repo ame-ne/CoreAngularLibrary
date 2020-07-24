@@ -93,6 +93,8 @@ namespace CoreAngularLibrary.Models
                 .HasOne(o => o.User)
                 .WithMany(u => u.Orders)
                 .HasForeignKey(k => k.UserId);
+
+            modelBuilder.Entity<Log>().ToTable("Logs");
         }
     }
 }

@@ -20,13 +20,15 @@ export class ErrorInterceptor implements HttpInterceptor {
             if (response.status === 401) {
                 this.authenticationService.logout();
                 this.router.navigateByUrl('/auth/login');
+                return throwError(response);
+            } else {
+                this.router.navigateByUrl('/error/403');
+                return throwError(response);
             }
-            this.router.navigateByUrl('/error/403');
-            return;
         }
         if (response.status === 404) {
             this.router.navigateByUrl('/error/404');
-            return;
+            return throwError(response);
         }
         let message: any = response.error || '';
 

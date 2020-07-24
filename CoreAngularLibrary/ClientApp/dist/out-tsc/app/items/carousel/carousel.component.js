@@ -22,7 +22,7 @@ let CarouselComponent = class CarouselComponent {
         this.imageData = [];
     }
     set dataSource(blobIds) {
-        if (blobIds) {
+        if (blobIds && blobIds.length > 0) {
             this.imageData = blobIds.map(x => ({
                 blobId: x,
                 url: '',
@@ -61,6 +61,7 @@ let CarouselComponent = class CarouselComponent {
     }
     loadImage() {
         return __awaiter(this, void 0, void 0, function* () {
+            this.currentImage = '';
             this.checkIndex();
             const currentImageData = this.imageData[this.currentIndex];
             if (currentImageData.isLoaded && currentImageData.url) {

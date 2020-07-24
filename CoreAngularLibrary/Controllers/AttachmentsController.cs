@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using CoreAngularLibrary.Attributes;
 using CoreAngularLibrary.Infrastructure.Interfaces;
 using CoreAngularLibrary.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -24,6 +25,7 @@ namespace CoreAngularLibrary.Controllers
 
         [HttpGet("{id}")]
         [AllowAnonymous]
+        [IgnoreLogging]
         public async Task<IActionResult> Get(int id)
         {
             var blob = await _blobRepo.GetByIdAsync(id);

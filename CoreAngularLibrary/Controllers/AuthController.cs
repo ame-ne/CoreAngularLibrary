@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CoreAngularLibrary.Attributes;
 using CoreAngularLibrary.Infrastructure;
 using CoreAngularLibrary.Infrastructure.Dto;
 using CoreAngularLibrary.Infrastructure.Interfaces;
@@ -40,6 +41,7 @@ namespace CoreAngularLibrary.Controllers
 
         [HttpPost("checkAccess")]
         [Authorize]
+        [IgnoreLogging]
         public IActionResult CheckAccess([FromBody] List<RoleEnum> roles)
         {
             //если роли не указаны, проверку что пользователь просто авторизован, выполнит атрибут

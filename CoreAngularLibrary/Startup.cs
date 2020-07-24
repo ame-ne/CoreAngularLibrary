@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using System;
 
@@ -67,16 +68,21 @@ namespace CoreAngularLibrary
                     };
                 });
 
+            services.AddLogging();
+
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddTransient<IDbTransaction, DbTransaction>();
 
+            services.AddSingleton<ILogger, DbLogger>();
+
             services
                 .AddControllers(options =>
                 {
                     options.Filters.Add(new ApiExceptionFilter());
+                    options.Filters.Add(new ApiActionFilter());
                 })
                 .AddNewtonsoftJson(options =>
                 {

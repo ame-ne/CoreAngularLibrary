@@ -21,13 +21,16 @@ let ErrorInterceptor = class ErrorInterceptor {
             if (response.status === 401) {
                 this.authenticationService.logout();
                 this.router.navigateByUrl('/auth/login');
+                return throwError(response);
             }
-            this.router.navigateByUrl('/error/403');
-            return;
+            else {
+                this.router.navigateByUrl('/error/403');
+                return throwError(response);
+            }
         }
         if (response.status === 404) {
             this.router.navigateByUrl('/error/404');
-            return;
+            return throwError(response);
         }
         let message = response.error || '';
         if (typeof message === 'string') {

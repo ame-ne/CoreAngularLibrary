@@ -1,9 +1,15 @@
 <div class="container">
     <div class="row">
-        <div><span *ngIf="imageData.length > 1" (click)="prev()" class="arrow left-arrow">←</span></div>
+        <div><span *ngIf="imageData.length > 1 && currentImage" (click)="prev()" class="arrow left-arrow">←</span></div>
         <div class="col-12 pr-2 pl-2" style="text-align: center;">
-            <img [src]="currentImage | safeImage" class="img-area" />
+            <img *ngIf="currentImage; else loader" [src]="currentImage | safeImage" class="img-area" />
+            <ng-template #loader>
+                <div>
+                    <img src="assets/loader.gif" style="width: 20px; height: 20px;" />
+                </div>
+            </ng-template>
         </div>
-        <div><span *ngIf="imageData.length > 1" (click)="next()" class="arrow right-arrow">→</span></div>
+        <div><span *ngIf="imageData.length > 1 && currentImage" (click)="next()" class="arrow right-arrow">→</span>
+        </div>
     </div>
 </div>

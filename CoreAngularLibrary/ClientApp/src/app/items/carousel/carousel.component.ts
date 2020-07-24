@@ -20,7 +20,7 @@ export class CarouselComponent implements OnInit, OnDestroy {
   currentImage: string;
 
   @Input() set dataSource(blobIds: number[]) {
-    if (blobIds) {
+    if (blobIds && blobIds.length > 0) {
       this.imageData = blobIds.map(x => <ImageData>{
         blobId: x,
         url: '',
@@ -69,6 +69,7 @@ export class CarouselComponent implements OnInit, OnDestroy {
   }
 
   async loadImage() {
+    this.currentImage = '';
     this.checkIndex();
     const currentImageData = this.imageData[this.currentIndex];
     if (currentImageData.isLoaded && currentImageData.url) {

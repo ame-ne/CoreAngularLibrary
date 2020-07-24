@@ -39,7 +39,7 @@ let BookPageComponent = class BookPageComponent {
                 genres: bookResult.bookGenres.map(x => x.genre && x.genre.title).join(', ')
             };
             bookResult.attachments.sort((a, b) => { if (a.isMain)
-                return 1; });
+                return -1; });
             this.book.pageExampleBlobIds = bookResult.attachments.map(x => x.blobId);
             const coverAttach = bookResult.attachments.find(x => x.isMain);
             if (coverAttach && coverAttach.blobId) {
